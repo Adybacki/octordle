@@ -15,10 +15,10 @@ const App = () => {
   const [feedback, setFeedback] = useState('');
   const [matchedLetters, setMatchedLetters] = useState(Array(targetWord.length).fill(false));
   const [inWordLetters, setInWordLetters] = useState(Array(targetWord.length).fill(false));
-  const [inputState, setInputState] = useState(false);
+  const [isMatch, setIsMatch] = useState(false);
 
   useEffect(() => {
-    if (attemptsLeft == 0) {
+    if (attemptsLeft == 0 && !isMatch) {
       setFeedback(`Sorry, you've reached the maximum number of attempts. The correct word was "${targetWord}".`);
       
     }
@@ -39,13 +39,14 @@ const App = () => {
     setMatchedLetters(newMatchedLetters);
     
 
-      const isMatch = userGuess.toUpperCase() === targetWord;
-      const newFeedback = isMatch ? `Congratulations! You guessed the word "${targetWord}".` : '';
-
+      if (userGuess.toUpperCase() === targetWord) {
+        setIsMatch(true)
+        setFeedback(`Congratulations! You guessed the word "${targetWord}".`);
+      }
+      
       setAttemptsLeft(attemptsLeft - 1);
       setGuessHistory([...guessHistory, { guess: userGuess}]);
       setUserGuess('');
-      setFeedback(newFeedback);
     } 
   };
 
@@ -88,7 +89,7 @@ const App = () => {
           length={8}
           className="guess-input"
           required
-          disabled = {attemptsLeft === 0}
+          disabled = {attemptsLeft === 0 || isMatch}
         />
         <button type="submit" className="submit-button">
           Submit Guess
