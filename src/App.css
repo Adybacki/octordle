@@ -1,38 +1,91 @@
-.App {
+body {
+  font-family: 'Arial', sans-serif;
   text-align: center;
+  background-color: #f4f4f4;
+  margin: 0;
+  padding: 0;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+.app-container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+h1 {
+  color: #333;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.word-display {
+  margin-top: 20px;
 }
 
-.App-link {
-  color: #61dafb;
+.letter {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+  border: 1px solid #ddd;
+  margin: 0 5px;
+  text-align: center;
+  line-height: 30px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #333;
+  background-color: #fff;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.letter.matched {
+  color: #4caf50;
+  background-color: #dff0d8;
+}
+
+.letter.in-word {
+  color: #f0ad4e; /* Yellow color for correct letters but in the wrong spot */
+  background-color: #fcf8e3;
+}
+
+.guess-input {
+  padding: 8px;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.submit-button {
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer;
+  background-color: #4caf50;
+  color: #fff;
+  border: none;
+  margin-top: 10px;
+}
+
+.submit-button:hover {
+  background-color: #45a049;
+}
+
+.guess-history {
+  margin-top: 20px;
+}
+
+.guess-history p {
+  margin-bottom: 5px;
+}
+
+.guess-history ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.guess-history li {
+  margin-bottom: 5px;
+}
+
+.attemptsLeft {
+  margin-top: 10px;
+  color: #888;
 }
