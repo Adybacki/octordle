@@ -1,6 +1,7 @@
 {
   "name": "octordle",
   "version": "0.1.0",
+  "homepage": "https://adybacki.github.io/octordle",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.17.0",
