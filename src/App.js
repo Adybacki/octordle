@@ -1,14 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 
-const generateRandomWord = () => {
-  const words = ['mountain', 'bacteria', 'conclude', 'academic', 'baseball', 'concrete', 'accepted', 'bathroom', 'conflict', 'accident', 'becoming'];
-  const randomIndex = Math.floor(Math.random() * words.length);
-  return words[randomIndex].toUpperCase();
-};
 
 const App = () => {
-  const [targetWord, setTargetWord] = useState(generateRandomWord());
+  const [targetWord, setTargetWord] = useState('');
   const [userGuess, setUserGuess] = useState('');
   const [attemptsLeft, setAttemptsLeft] = useState(10);
   const [guessHistory, setGuessHistory] = useState([]);
@@ -18,9 +13,23 @@ const App = () => {
   const [isMatch, setIsMatch] = useState(false);
 
   useEffect(() => {
+      const fetchWord = async () => {
+        const url = 'https://random-word-api.herokuapp.com/word?length=8';
+        try {
+          const response = await fetch(url);
+          const data = await response.json();
+          setTargetWord(data[0].toUpperCase());
+          console.log(data);
+        } catch (error) {
+          console.error(error);
+        }
+      }
+    fetchWord();
+  }, []);
+
+  useEffect(() => {
     if (attemptsLeft == 0 && !isMatch) {
       setFeedback(`Sorry, you've reached the maximum number of attempts. The correct word was "${targetWord}".`);
-      
     }
   }, [attemptsLeft, targetWord]);
 
@@ -79,7 +88,7 @@ const App = () => {
           </span>
         ))}
       </div>
-      <form onSubmit={handleGuessSubmit}>
+      <form className="textboxInput" onSubmit={handleGuessSubmit}>
         <input
           type="text"
           value={userGuess}
@@ -89,7 +98,7 @@ const App = () => {
           length={8}
           className="guess-input"
           required
-          disabled = {attemptsLeft === 0 || isMatch}
+          disabled ={attemptsLeft === 0 || isMatch}
         />
         <button type="submit" className="submit-button">
           Submit Guess
@@ -104,5 +113,6 @@ const App = () => {
 };
 
 export default App;
+
 
 
